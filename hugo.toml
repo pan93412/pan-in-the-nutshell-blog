@@ -1,3 +1,16 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://blog.pan93.com'
+languageCode = 'zh-tw'
+title = 'Pan in the Nutshell'
+theme = 'PaperMod'
+
+[params.homeInfoParams]
+Title = "Pan in the Nutshell"
+Content = "分享一些軟體工程和開發的想法 🥰"
+
+[[params.socialIcons]]
+name = "x"
+url = "https://x.com/byStarTW"
+
+[[params.socialIcons]]
+name = "other"
+url = "https://pan93.com"

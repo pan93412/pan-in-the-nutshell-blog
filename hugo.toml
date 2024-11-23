@@ -42,6 +42,10 @@ name = "facebook"
 url = "https://www.facebook.com/pan93412TW"
 
 [[params.socialIcons]]
+name = "threads"
+url = "https://www.threads.net/pan93412"
+
+[[params.socialIcons]]
 name = "email"
 url = "mailto:me@pan93.com"
 

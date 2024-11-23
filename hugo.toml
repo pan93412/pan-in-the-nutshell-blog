@@ -1,11 +1,24 @@
 baseURL = 'https://blog.pan93.com'
 languageCode = 'zh-tw'
+defaultContentLanguage = 'zh-tw'
 title = 'Pan in the Nutshell'
 theme = 'PaperMod'
+sectionPagesMenu = 'main'
+
+[params]
+description = "Pan in the Nutshell – 分享一些軟體工程和開發的想法 🥰"
+author = "pan93412"
+ShowBreadCrumbs = true
 
 [params.homeInfoParams]
 Title = "Pan in the Nutshell"
 Content = "分享一些軟體工程和開發的想法 🥰"
+
+[params.assets]
+favicon = "/favicon.ico"
+favicon16x16 = "/favicon-16x16.png"
+favicon32x32 = "/favicon-32x32.png"
+apple_touch_icon = "/apple-touch-icon.png"
 
 [[params.socialIcons]]
 name = "x"
@@ -14,3 +27,6 @@ url = "https://x.com/byStarTW"
 [[params.socialIcons]]
 name = "other"
 url = "https://pan93.com"
+
+[params.outputs]
+home = ['HTML', 'RSS', 'JSON']

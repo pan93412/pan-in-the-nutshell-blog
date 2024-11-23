@@ -1,7 +1,7 @@
 ---
 title: 為何退租 VPS。
 date: 2021-05-04 12:28:52
-lastmod:: 2021-05-04 12:28:52
+lastmod: 2021-05-04 12:28:52
 tags:
   - school
   - vps

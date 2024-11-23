@@ -1,7 +1,7 @@
 ---
 title: 從個人網站學習專案管理的方法論
 date: 2022-12-16 00:02:06
-lastmod:: 2022-12-18 01:42:01
+lastmod: 2022-12-18 01:42:01
 tags:
   - frontend
   - website

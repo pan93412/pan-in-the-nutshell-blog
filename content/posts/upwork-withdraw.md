@@ -3,7 +3,7 @@ title: 未成年在 Upwork 活該拿不回錢。
 tags: ["upwork", "freelancer", "money", "underage"]
 categories: The thoughts
 date: 2021-01-11 00:05:13
-lastmod:: 2021-01-11 00:05:13
+lastmod: 2021-01-11 00:05:13
 ---
 
 ## TL;DR

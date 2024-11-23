@@ -13,7 +13,8 @@ tags:
   - visual studio
 categories: The thoughts
 date: 2020-11-02 08:57:07
-lastmod:: 2020-11-02 08:57:07
+lastmod: 2020-11-02 08:57:07
+robotsNoIndex: true
 ---
 
 **又墊底了。**

@@ -9,6 +9,8 @@ sectionPagesMenu = 'main'
 description = "Pan in the Nutshell – 分享一些軟體工程和開發的想法 🥰"
 author = "pan93412"
 ShowBreadCrumbs = true
+ShowPostNavLinks = true
+showtoc = true
 
 [params.homeInfoParams]
 Title = "Pan in the Nutshell"

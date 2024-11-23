@@ -8,7 +8,6 @@ sectionPagesMenu = 'main'
 [params]
 description = "Pan in the Nutshell – 分享一些軟體工程和開發的想法 🥰"
 author = "pan93412"
-ShowBreadCrumbs = true
 ShowPostNavLinks = true
 showtoc = true
 
@@ -25,6 +24,26 @@ apple_touch_icon = "/apple-touch-icon.png"
 [[params.socialIcons]]
 name = "x"
 url = "https://x.com/byStarTW"
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/pan93412"
+
+[[params.socialIcons]]
+name = "bluesky"
+url = "https://bsky.app/profile/pan93412.bsky.social"
+
+[[params.socialIcons]]
+name = "mastodon"
+url = "https://social.slat.org/@pan93412"
+
+[[params.socialIcons]]
+name = "facebook"
+url = "https://www.facebook.com/pan93412TW"
+
+[[params.socialIcons]]
+name = "email"
+url = "mailto:me@pan93.com"
 
 [[params.socialIcons]]
 name = "other"

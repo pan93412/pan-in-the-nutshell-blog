@@ -34,7 +34,9 @@ tags: ['blog', 'zeabur', 's3', 'hugo']
 
 圖床用 **支援 S3 API 為基礎的儲存空間** 搭建。S3 API 基本上是檔案儲存 API 的一種業界標準：
 
-> The broad adoption of Amazon S3 and related tooling has given rise to competing services based on the S3 API. These services use the standard programming interface but are differentiated by their underlying technologies and business models. [^1](<https://en.wikipedia.org/wiki/Amazon_S3>)
+> The broad adoption of Amazon S3 and related tooling has given rise to competing services based on the S3 API. These services use the standard programming interface but are differentiated by their underlying technologies and business models. [^1]
+
+[^1]: <https://en.wikipedia.org/wiki/Amazon_S3>
 
 這裡使用 **Cloudflare R2**，它的輸出流量免費、寫入和儲存成本遠低於 Amazon S3，同時有著和 S3 幾乎一致的介面。不過純 R2 的 UI 稱不上 user-friendly，所以還會需要套一個 S3 的管理介面。這裡我選 Cloudreve，介面簡單、舒適，操作迅速，而且支援 Cloudflare R2。
 

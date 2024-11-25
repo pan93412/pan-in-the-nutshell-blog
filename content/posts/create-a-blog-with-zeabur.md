@@ -140,7 +140,7 @@ Zeabur 會自動判斷出 Hugo 專案，直接按下「部署」即可。
 Cloudreve 允許你上傳整個資料夾（並行上傳）和任何檔案，使用體驗接近 Google Drive，可以自行摸索～如果要取得直通 CDN 的網址，有兩種方式：
 
 1. 使用 Cloudreve 的「獲取外鏈」功能。使用者打開圖片，會先進到你的 Cloudreve 再轉導到 R2。好處是網址經過 Cloudreve 整理，不會直接暴露你儲存圖片的資料夾結構，而且 Cloudreve 也允許你一次取得資料夾底下的所有外鏈；壞處是會多一個 301 轉導的流量費用和連線延遲。
-    ![get external link from Cloudreve](https://assets.blog.pan93.com/create-a-blog-with-zeabur/cloudreve-get-external-link.png)
+   ![get external link from Cloudreve](https://assets.blog.pan93.com/create-a-blog-with-zeabur/cloudreve-get-external-link.png)
 2. 點選「下載」功能，直接打開 R2 上的實體路徑。好處是沒有額外流量費用，直接連線，最大善用 Cloudflare 的 CDN；壞處是取得比「獲取外鏈」麻煩一點。
 
 我自己會偏好先用 Cloudreve 的「獲取外鏈」功能取得所有圖片的連結，然後用瀏覽器點開讓瀏覽器跳轉，換成 R2 的直接連結。無論你最後選擇什麼連結，都可以用 Markdown 語法貼上連結：

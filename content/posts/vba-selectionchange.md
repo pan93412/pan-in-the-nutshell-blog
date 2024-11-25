@@ -32,13 +32,13 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
 
 別急著複製。VBA 其實有提供一個非常簡單的事件選取工具。首先開啟 VBA 編輯器，找到你想要監聽的工作表，然後按一下上方的 \[(一般)\]，之後選擇 \[Worksheet\]。
 
-![按一下 [專案] 中的其中一個工作表之後，在彈出來的畫面中按一下 [(一般)]，之後按下 [Worksheet]。](https://assets.blog.pan93.com/vba-selectionchange/image-5.webp)
+![按一下「專案」中的其中一個工作表之後，在彈出來的畫面中按一下「(一般)」，之後按下「Worksheet」。](https://assets.blog.pan93.com/vba-selectionchange/image-5.webp)
 
 選擇 Worksheet
 
 然後選擇 \[SelectionChange\]，搞定！
 
-![接著，找到旁邊的下拉框，選擇 [SelectionChange]。](https://assets.blog.pan93.com/vba-selectionchange/image-6.webp)
+![接著，找到旁邊的下拉框，選擇「SelectionChange」。](https://assets.blog.pan93.com/vba-selectionchange/image-6.webp)
 
 選擇 SelectionChange
 

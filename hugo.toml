@@ -30,6 +30,14 @@ name = "github"
 url = "https://github.com/pan93412"
 
 [[params.socialIcons]]
+name = "telegram"
+url = "https://t.me/bystartw_chan"
+
+[[params.socialIcons]]
+name = "threads"
+url = "https://www.threads.net/pan93412"
+
+[[params.socialIcons]]
 name = "bluesky"
 url = "https://bsky.app/profile/pan93412.bsky.social"
 
@@ -40,10 +48,6 @@ url = "https://social.slat.org/@pan93412"
 [[params.socialIcons]]
 name = "facebook"
 url = "https://www.facebook.com/pan93412TW"
-
-[[params.socialIcons]]
-name = "threads"
-url = "https://www.threads.net/pan93412"
 
 [[params.socialIcons]]
 name = "email"

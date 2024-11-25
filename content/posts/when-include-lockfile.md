@@ -3,7 +3,7 @@ title = '什麼時候該引入 Lockfile？'
 tags = ['lockfile', 'npm', 'cargo', 'twitter']
 categories = ['Developments']
 date = '2022-10-18T13:37:00+08:00'
-lastmods = '2022-10-24T22:19:37+08:00'
+lastmod = '2022-10-24T22:19:37+08:00'
 +++
 
 > [原文撰於 Twitter](https://twitter.com/bystartw/status/1582244519319597056?s=61&t=E09UfEWbDsXiuks4rs0Y3g)。

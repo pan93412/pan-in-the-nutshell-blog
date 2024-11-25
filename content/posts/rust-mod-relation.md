@@ -3,7 +3,7 @@ title = 'Rust 的 crate/super/self 關係'
 tags = ['Rust', 'crate', 'super', 'self', 'programming']
 categories = ['Developments']
 date = '2021-10-13T11:06:21+08:00'
-lastmods = '2021-10-13T11:12:00+08:00'
+lastmod = '2021-10-13T11:12:00+08:00'
 +++
 
 ![`rust_hello_world` 的架構圖，與 crate、super、self 的關係](https://assets.blog.pan93.com/rust-mod-relation/crate-relation.png)

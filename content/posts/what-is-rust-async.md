@@ -1,7 +1,7 @@
 ---
 title: 文組也能懂的 Rust async 機制
 date: 2022-08-07 13:03:20
-lastmods: 2022-08-07 19:59:00
+lastmod: 2022-08-07 19:59:00
 tags:
   - Rust
   - async

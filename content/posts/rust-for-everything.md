@@ -3,7 +3,7 @@ title = 'Rust for everything'
 tags = ['Rust', 'random', 'development']
 categories = ['Random']
 date = '2022-08-12T01:44:41+08:00'
-lastmods = '2024-11-23T12:37:00+08:00'
+lastmod = '2024-11-23T12:37:00+08:00'
 +++
 
 src: <https://redd.it/wllpa4> (<https://t.me/programmer_humor/38462>)

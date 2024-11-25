@@ -3,7 +3,7 @@ title = '善用 Swift 的字串擷取功能簡化 I18n 流程'
 tags = ['Swift', 'Compiler', 'Xcode', 'I18n', 'L10n']
 categories = ['Developments']
 date = '2022-08-27T19:47:25+08:00'
-lastmods = '2022-08-27T19:47:25+08:00'
+lastmod = '2022-08-27T19:47:25+08:00'
 +++
 
 ## 撰文原由

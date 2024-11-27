@@ -3,7 +3,6 @@ date: '2024-11-25T13:14:26+08:00'
 title: '把 Python 的 venv 移到其他機器'
 tags: ['python', 'venv']
 categories: ['Developments']
-draft: true
 ---
 
 ## 前言

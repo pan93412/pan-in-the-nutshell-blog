@@ -3,6 +3,7 @@ date: '2024-11-28T07:58:43+08:00'
 title: '從 PHP Symfony 應用程式分出微服務'
 tags: ['symfony', 'microservice', 'php', 'go', 'api']
 categories: ['Developments']
+draft: true
 ---
 
 ## Background

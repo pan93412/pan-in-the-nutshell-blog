@@ -39,3 +39,5 @@ categories = ['Developments']
 
 - Threads: <https://www.threads.net/@pan93412/post/DFnYWwbSQmV?xmt=AQGzOrH5bfvl9_sAcoKIHT3o3nwhyNpMfe6AJybnItrFAg>
 - Telegram: <https://t.me/bystartw_chan/320>
+- X / Twitter: <https://x.com/byStarTW/status/1886808612670202064>
+- Bluesky: <https://bsky.app/profile/pan93412.bsky.social/post/3lhegxdgajs25>

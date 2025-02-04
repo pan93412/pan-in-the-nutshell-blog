@@ -59,4 +59,5 @@ categories = ['Developments']
 
 ## 💬 互動區塊
 
-待補。
+- Threads: <https://www.threads.net/@pan93412/post/DFqB_tNyE1l?xmt=AQGzBOLoMEhkRAY6UDRliKVi6FU0Lcoz1OlalWDSZD8Sfw>
+- Telegram: <https://t.me/bystartw_chan/323>

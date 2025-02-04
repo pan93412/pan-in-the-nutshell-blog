@@ -5,8 +5,6 @@ tags: ['microservice', 'telemetry', 'request id', 'observability']
 draft: true
 ---
 
-# 導入可監控性：OpenTelemetry 實踐和 Request ID 實作
-
 ## 前言：為什麼會需要 Trace ID？
 
 透過有限的報告資訊，定位出是哪個程式出了問題，是很有難度的。舉例來說，假如我們收到一份內容只有「無法部署」的 ticket，要怎麼定位出「無法部署」的原因？
@@ -113,7 +111,7 @@ JSON 作為一個廣為使用的資料交換格式，我們可不可以把錯誤
 
 假如我們是把這種結構化 Log 輸出到 Console 上的話，基本上會把它壓成一列，這樣子一列就會是一個 Log，相對會好處理很多，比如說我們可以寫 Python script 來逐列分析 Log 的內容。
 
-不過 structured logs 輸出到 Console 有時候不好篩選和分析，假如我們想看某個子系統的 Logs，輸出到 Console 會需要我們讀取每一列 Logs 來進行篩選。如果我們把 logs 放到資料庫 (OLAP) 裡面，會不會更方便我們篩選甚至是快速查詢？
+不過 structured logs 輸出到 Console 有時候不好篩選和分析。假如我們想看某個子系統的 Logs，輸出到 Console 會需要我們讀取每一列 Logs 來進行篩選。如果我們把 logs 放到資料庫 (OLAP) 裡面，會不會更方便我們篩選甚至是快速查詢？
 
 ### 存入資料庫
 
@@ -122,3 +120,51 @@ Logs 首先很明顯是種 [時序資料](https://ithelp.ithome.com.tw/m/article
 把 Logs 存到資料庫後，我們就能非常快速地根據使用者給出的 request ID 和情境資訊，檢索出需要的記錄。
 
 ![logs to database](https://assets.blog.pan93.com/opentelemetry-implementation/logs-to-database.png)
+## Step 2: 使用 OpenTelemetry 記錄情境和 Logs
+
+### 標準化 Logging
+
+**有沒有一種標準化、很多 Library 都通用的 Log 方案**？畢竟現在我們設計的 structured logs 其實是自己定義的，其他 apps 或者是函式庫可能也會自己定義一個 logs 的結構，存入 NoSQL 資料庫後就會變得非常混亂，難以檢索。如果我們要把這些 apps 或函式庫的 logging 格式改掉，工作量會變得很大，而且依然不通用。
+
+有沒有一種框架可以簡化這部分的邏輯呢？我們希望它可以涵蓋這些方面：
+
+- 它可以根據框架的屬性，自動蒐集用戶端的 IP、User Agent 以及請求的 URL。
+- 它可以讓我們把 Logs 存到任何位置，包括 Console、上面提到的 Clickhouse 等等的地方。
+- 在分布式系統中，Request ID 可以被傳遞到其他地方，讓我們可以往回追溯系統。
+
+### OpenTelemetry
+
+OpenTelemetry 就是個這樣的框架。OpenTelemetry 的一個重要目標就是「讓你在任何語言、基礎架構和執行環境都可以記錄 (instrument) 你的應用程式或系統[^3]，」它有完整的規格，有多門程式語言的實作，以及這些程式語言常用框架的遙測生態。同時，OpenTelemetry 也有提供 Baggage 可以把情境資訊傳遞給其他服務，在追蹤分散式系統方面相當實用。最後，OpenTelemetry 除了上面說的 Logging 之外，也有 Tracing 和 Metrics 的功能。
+
+[^3]: https://community.cncf.io/opentelemetry/
+
+OpenTelemetry 作為一個業界標準，也有很多平台可以蒐集 OpenTelemetry 記錄的資料，比如 [Datadog](https://www.datadoghq.com/)、[Grafana Cloud](https://grafana.com/products/cloud/)、[Sentry](https://sentry.io/) 以及 [Baselime](https://baselime.io/)。當然你也可以 Host 一個 collector 跟要儲存到的資料庫，然後用比如 Grafana 的面板檢視蒐集出的資料。
+
+OpenTelemetry 的結構大概是這樣的。基本上就是應用程式（或你的 infra）用 OpenTelemetry 蒐集資料，經過 OTel Collector 寫入時序資料庫當中。
+
+![opentelemetry structure](https://assets.blog.pan93.com/opentelemetry-implementation/opentelemetry-structure.png)
+
+其中就以 Grafana 生態來說，Tracing 的後端會用 [Grafana Tempo](https://grafana.com/oss/tempo/)；Logs 的後端會用 [Grafana Loki](https://grafana.com/oss/loki/)；Metrics 的後端會用 [Prometheus](https://prometheus.io/)。
+
+### OpenTelemetry 怎麼存 Logs？
+
+OpenTelemetry 輸出到 Loki 的 Log，會與 Tracing 產生關聯。它的階層關係是「一個 Tracing 會有好幾個 Logs。」此外，OpenTelemetry 的 Logs「Field」是鍵值關係，而不是巢狀物件關係。
+
+![opentelemetry logs structure](https://assets.blog.pan93.com/opentelemetry-implementation/opentelemetry-logs-structure.png)
+
+所以，如果你要表達 HTTP 下的請求資訊，你會用 `.` 隔開 namespace：
+
+```
+request.uri = "/search"
+request.parameter.query = "xxx"
+```
+
+### 用 OpenTelemetry SDK 實作 Request ID
+
+在 Golang 上使用 OpenTelemetry SDK 進行 Logging，基本上是這樣：
+
+![OpenTelemetry Logging implementation under Golang](https://assets.blog.pan93.com/opentelemetry-implementation/opentelemetry-golang-logging-implementation.png)
+
+你可以使用 `span.TraceID()` 來取得目前這個 Trace 的 ID，然後我們就能把 Trace ID 回傳給使用者了。
+
+![Implementing Request ID: Returning ](https://assets.blog.pan93.com/opentelemetry-implementation/otel-requestid-return-traceid.png)

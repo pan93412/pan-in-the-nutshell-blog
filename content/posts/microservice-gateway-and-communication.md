@@ -72,4 +72,7 @@ categories = ['Developments']
 
 ## 💬 互動區塊
 
-WIP
+- Threads: <https://www.threads.net/@pan93412/post/DFsm41vyCto?xmt=AQGzl7pjfhsQTvC7cvx3dZ14EaAxQQRWNXBfOgqrMPa1IA>
+- Telegram: <https://t.me/bystartw_chan/324>
+- X / Twitter: <https://x.com/byStarTW/status/1887169833097375844>
+- Bluesky: <https://bsky.app/profile/pan93.com/post/3lhgx4pmpl227>

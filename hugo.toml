@@ -23,31 +23,31 @@ apple_touch_icon = "/apple-touch-icon.png"
 
 [[params.socialIcons]]
 name = "x"
-url = "https://x.com/byStarTW"
+url = "https://x.com/byStarTW/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "github"
-url = "https://github.com/pan93412"
+url = "https://github.com/pan93412/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "telegram"
-url = "https://t.me/bystartw_chan"
+url = "https://t.me/bystartw_chan/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "threads"
-url = "https://www.threads.net/pan93412"
+url = "https://www.threads.net/pan93412/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "bluesky"
-url = "https://bsky.app/profile/pan93412.bsky.social"
+url = "https://bsky.app/profile/pan93.com/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "mastodon"
-url = "https://social.slat.org/@pan93412"
+url = "https://social.slat.org/@pan93412/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "facebook"
-url = "https://www.facebook.com/pan93412TW"
+url = "https://www.facebook.com/pan93412TW/?utm_source=blog&utm_medium=social_links"
 
 [[params.socialIcons]]
 name = "email"
@@ -55,7 +55,7 @@ url = "mailto:me@pan93.com"
 
 [[params.socialIcons]]
 name = "other"
-url = "https://pan93.com"
+url = "https://pan93.com/?utm_source=blog&utm_medium=social_links"
 
 [params.outputs]
 home = ['HTML', 'RSS', 'JSON']

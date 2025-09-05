@@ -30,7 +30,9 @@ draft: true
 - 在 Go 底下有很成熟的 codegen。[^3]
 
 [^1]: <https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers>
+
 [^2]: <https://grpc.io>
+
 [^3]: <https://grpc.io/docs/languages/go/quickstart/>
 
 不過 gRPC 在其他語言上就不是這麼理想的選擇了。舉例來說：
@@ -39,16 +41,23 @@ draft: true
 - gRPC 的 PHP extension 可能會跟 FrankenPHP 的 worker 模式發生衝突，用 `glibc` 在我的 case 下也會出現 crash 的問題[^7]。
 - gRPC 在 Rust 上沒有官方支援，`prost` 與現有的 Rust ecosystem 整合不算太好[^8]，而第三方的 WKT 解法不是很優雅[^9]。
 - gRPC 預設對於大 Payload 有著 4MiB 限制[^10]，而轉成 Streaming API 會引入其他開發負擔[^11]。
-    - HTTP 的 streaming 相對來說比較 naive，而且可以用支援 stream 的 JSON decoder 處理。
+  - HTTP 的 streaming 相對來說比較 naive，而且可以用支援 stream 的 JSON decoder 處理。
 - gRPC 沒有 HTTP API 可以方便 debug 或在不支援 gRPC 的語言進行呼叫（雖然有相容 gRPC 的 [connectrpc](https://connectrpc.com) 可以使用）
 
 [^4]: <https://github.com/grpc/grpc/issues/29041>
+
 [^5]: <https://github.com/grpc/grpc/issues/33431>
+
 [^6]: <https://grpc.io/docs/languages/php/basics/#calling-service-methods>
+
 [^7]: <https://github.com/dunglas/frankenphp/issues/676#issuecomment-2138660167>
+
 [^8]: <https://github.com/tokio-rs/prost/issues/537>
+
 [^9]: <https://github.com/fdeantoni/prost-wkt>
+
 [^10]: <https://learn.microsoft.com/zh-tw/aspnet/core/grpc/security?view=aspnetcore-8.0#message-size-limits>
+
 [^11]: <https://grpc.io/docs/languages/go/basics/#server-side-streaming-rpc-1>
 
 另外配置 `protoc` 也是一筆不小的時間開銷，而且 JSON 序列化 / 反序列化的時間並不是 SQL Runner 的瓶頸。所以，我最終選擇用很簡單的 HTTP API + JSON 做一個 interface。
@@ -64,7 +73,7 @@ http.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
 })
 ```
 
-如果你的 API 有一些依賴或者是狀態（比如快取或者是互斥鎖），也可以讓 struct 實作  [`http.Handler`](https://pkg.go.dev/net/http#Handler)，然後傳入 `http.Handle` 當中：
+如果你的 API 有一些依賴或者是狀態（比如快取或者是互斥鎖），也可以讓 struct 實作 [`http.Handler`](https://pkg.go.dev/net/http#Handler)，然後傳入 `http.Handle` 當中：
 
 ```go
 service := &SqlQueryService{ /* stateful */ }

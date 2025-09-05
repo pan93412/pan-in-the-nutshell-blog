@@ -120,6 +120,7 @@ Logs 首先很明顯是種 [時序資料](https://ithelp.ithome.com.tw/m/article
 把 Logs 存到資料庫後，我們就能非常快速地根據使用者給出的 request ID 和情境資訊，檢索出需要的記錄。
 
 ![logs to database](https://assets.blog.pan93.com/opentelemetry-implementation/logs-to-database.png)
+
 ## Step 2: 使用 OpenTelemetry 記錄情境和 Logs
 
 ### 標準化 Logging
@@ -167,4 +168,4 @@ request.parameter.query = "xxx"
 
 你可以使用 `span.TraceID()` 來取得目前這個 Trace 的 ID，然後我們就能把 Trace ID 回傳給使用者了。
 
-![Implementing Request ID: Returning ](https://assets.blog.pan93.com/opentelemetry-implementation/otel-requestid-return-traceid.png)
+![Implementing Request ID: Returning](https://assets.blog.pan93.com/opentelemetry-implementation/otel-requestid-return-traceid.png)

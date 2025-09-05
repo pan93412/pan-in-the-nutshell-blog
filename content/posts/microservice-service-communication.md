@@ -1,6 +1,6 @@
 +++
 date = '2025-09-05T20:22:00+08:00'
-title = '聊聊微服務是什麼 - 服務通訊'
+title = '聊聊微服務是什麼 – 服務通訊'
 tags = ['microservice', 'backend', 'SITCON 2025']
 categories = ['Developments']
 +++

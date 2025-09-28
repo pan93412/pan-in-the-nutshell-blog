@@ -31,9 +31,11 @@ express-handlebars 通常是純粹的 SSR，不考慮你在頁面中插入的 Ja
 
 ![CSR (fetch)](https://assets.blog.pan93.com/how-nextjs-rendering-works/csr-fetch.avif)
 
-另外，Next.js 預設會對所有頁面進行預渲染（Prerendering）[^prerendering]，無論是 SSG 還是 SSR 都屬於預渲染的範疇，目的是提供初始的 HTML 內容來改善 SEO 和首次載入速度，接著到使用者的瀏覽器後再進行 hydrate，讓頁面變得可以互動。你也可以使用 `next/dynamic` 搭配 `ssr: false` 來將元件從預渲染中排除掉，這樣元件就不會在伺服器上渲染，完全 CSR[^disable-ssr]。
+另外，Next.js 預設會對所有頁面進行預渲染（Prerendering）[^prerendering]，無論是 SSG 還是 SSR 都屬於預渲染的範疇，目的是提供初始的 HTML 內容來改善 SEO 和首次載入速度，接著到使用者的瀏覽器後再進行 hydrate，讓頁面變得可以互動。
 
 ![SSR hydrate](https://assets.blog.pan93.com/how-nextjs-rendering-works/ssr-hydrate.avif)
+
+你也可以使用 `next/dynamic` 搭配 `ssr: false` 來將元件從預渲染中排除掉，這樣元件就不會在伺服器上渲染，完全 CSR[^disable-ssr]。
 
 [^pages-ssg]: <https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation>
 [^pages-isr]: <https://nextjs.org/docs/pages/guides/incremental-static-regeneration>
@@ -46,9 +48,9 @@ express-handlebars 通常是純粹的 SSR，不考慮你在頁面中插入的 Ja
 
 App Router 採用了更加自動化的渲染選擇機制，讓開發者無需明確指定使用哪種渲染模式。
 
-Client Components 像是 Pages Router 既有的元件形式，而 Server Components 其實更像是 express-handlebars 這種傳統後端，頁面會在伺服器端渲染，並將渲染結果建構成 [RSC](https://nextjs.org/docs/app/getting-started/server-and-client-components#on-the-server)。這個 RSC 是在什麼時機產生的呢？可以分成兩種情況[^app-router-rendering]：
+Client Components 像是 Pages Router 既有的元件形式，而 Server Components 其實更像是 express-handlebars 這種傳統後端，頁面會在伺服器端渲染，並將渲染結果建構成 [RSC](https://nextjs.org/docs/app/getting-started/server-and-client-components#on-the-server)，其中包含 Server Components 的序列化資料和渲染指令。這個 RSC 是在什麼時機產生的呢？可以分成兩種情況[^app-router-rendering]：
 
-- 如果這個 Server Components 沒有使用動態 API（如 cookies()、headers()、searchParams）且所有資料取回都可在建置時確定，Next.js 就會採用「靜態渲染」策略。
+- 如果這個 Server Components 沒有使用動態 API（如 `cookies()`、`headers()`、`searchParams`）且所有資料取回都可在建置時確定，Next.js 就會採用「靜態渲染」策略。
 - 如果這個 Server Components 需要用到請求期才能知道的資料，則是在請求期進行渲染，也就是「動態渲染」。
 
 而靜態渲染的更新（revalidate）時機又有好幾種：
@@ -57,7 +59,7 @@ Client Components 像是 Pages Router 既有的元件形式，而 Server Compone
 - 如果你在 Server Components 中 `fetch` 的資料過期了（invalidated），那就會觸發 [Data Cache](https://nextjs.org/docs/app/guides/caching#data-cache) 的 Revalidation，這時候就會在請求期重新渲染後，將資料寫入 ISR 快取[^isr-note]。
 - 當然還有傳統的 [ISR](https://nextjs.org/docs/app/guides/incremental-static-regeneration)，在編譯期宣告所有路由參數的組合（比如 `/posts/[id]` 中的 ID）。當 revalidate 時間到期時，會重新產生對應路由的內容。
 
-如果是第一次載入頁面 (first load)，Next.js 會把 Server Components 的 RSC 和 Client Components 一起做 [預渲染](https://nextjs.org/learn/pages-router/data-fetching-pre-rendering)[^server-component-rendering-flow]，預先渲染成 HTML 後再進行 hydrate。後續切換路由時，Client Components 會改由瀏覽器端渲染（伺服器端不參與渲染，也就是 CSR），而 Server Components 繼續由伺服器端渲染之後回傳給用戶端進行渲染[^interleaving-server-and-client-components]。
+如果是第一次載入頁面 (first load)，Next.js 會把 Server Components 的 RSC 和 Client Components 一起做 [預渲染](https://nextjs.org/learn/pages-router/data-fetching-pre-rendering)[^server-component-rendering-flow]，回傳 HTML 後再交由瀏覽器進行 hydrate。後續切換路由時，Client Components 會改由瀏覽器端渲染（伺服器端不參與渲染，也就是 CSR），而 Server Components 繼續由伺服器端渲染之後回傳給用戶端進行渲染[^interleaving-server-and-client-components]。
 
 > Next.js 負責渲染一堆 components 的後端伺服器，扮演的就是 [Backend for Frontend](https://nextjs.org/docs/app/guides/backend-for-frontend) 的角色。
 
@@ -74,7 +76,7 @@ Client Components 像是 Pages Router 既有的元件形式，而 Server Compone
 
 - 大部分能被靜態渲染的 Server Components 都會在編譯期準備好 (SSG)。
 - 打開頁面時，可以看到頁面被 Prerendering 了：Client Components 和 Server Components 會在伺服器端準備好後回傳 HTML 回來 (SSR)。
-- 切換不同頁面時，Client Components 就是直接在瀏覽器裡面渲染了，而 Server Components 瀏覽器會透過 `?_rsc` endpoints 取得對應的 RSC payload，裡面包含 Server Components 的序列化資料和渲染指令。
+- 切換不同頁面時，Client Components 就是直接在瀏覽器裡面渲染了，而 Server Components 瀏覽器會透過 `?_rsc` endpoints 取得對應的 RSC payload。
 - 如果你的 Client Components 呼叫了 `fetch` 相關的 hooks，那通常都是 CSR。如果有搭配 streaming SSR 的框架 (e.g. [@apollo/client-react-streaming](https://github.com/apollographql/apollo-client-integrations/tree/main/packages/client-react-streaming))，那也可能是 SSR 的。
 
 如果想要看看每種渲染方式的觸發時機的話，在 Vercel 的 Observability 中可以分開來看：
@@ -93,9 +95,9 @@ Next.js 還有一個實驗性的魔法。通常來講伺服器端渲染都是「
 
 在 CSR 中這個事情很好處理：我們只要把需要花很久的元件，先顯示一個 Fallback 的 Loading 狀態，等到資料拉取完成之後再顯示渲染完成的資料就好。在 Suspense 的世界中，我們則會使用 [Suspense](https://react.dev/reference/react/Suspense) 來包住需要非同步渲染的元件，渲染完成之前顯示 `fallback`，`children` 渲染完成後再補回去顯示。但在 Prerendering 的 SSR 中，這個就不太好處理：我們要怎麼先回傳 Fallback 的 HTML，等到渲染完成之後再回傳 Children 呢？
 
-Next.js 實驗性的 PPR 就在嘗試解決這個問題。假如你啟用了 [PPR (Partial Prerendering)](https://nextjs.org/docs/app/getting-started/partial-prerendering)，那就會看到 prerendering HTML 以一種很特別的形式回傳回來：你會看到 App 的框架和 Fallback 先回傳回來，然後後面組了一些好像不太合 HTML 規範的資料和一些 script，整個請求需要很長一段時間才會結束，但頁面卻不用等整個 HTML 下載完就能進行渲染。
+Next.js 實驗性的 PPR 就在嘗試解決這個問題。假如你啟用了 [PPR (Partial Prerendering)](https://nextjs.org/docs/app/getting-started/partial-prerendering)，那就會看到 prerendering HTML 以一種很特別的形式回傳回來：你會看到 App 的框架和 Fallback 先回傳回來，然後後面繼續回傳了一些好像不太合 HTML 規範的 DOM 和一些 script，整個請求需要很長一段時間才會結束，但頁面卻不用等整個 HTML 下載完就能進行渲染。
 
-簡單來說，PPR 運用了 [HTML 串流 (Streaming)](https://nextjs.org/learn/dashboard-app/streaming) 技術：
+簡單來說，PPR 運用了 [HTML 串流 (Streaming)](https://nextjs.org/docs/app/getting-started/partial-prerendering#streaming) 技術：
 
 ![server rendering with streaming, src: https://nextjs.org/docs/app/getting-started/partial-prerendering](https://assets.blog.pan93.com/how-nextjs-rendering-works/vercel-assets/server-rendering-with-streaming.webp)
 

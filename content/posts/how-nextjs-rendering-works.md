@@ -117,5 +117,5 @@ Next.js 實驗性的 PPR 就在嘗試解決這個問題。假如你啟用了 [PP
 
 ## 更新日誌和勘誤
 
-- 感謝 OrkWard 提出文章中「[動態路由](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes)」、「[動態 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)」混用的問題，文章已經針對 Next.js 的正確概念整篇重寫：<https://t.me/c/1066867565/2166664>
+- 感謝 OrkWard 提出文章中「[動態路由](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes)」、「[動態 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)」混用的問題，文章已經針對 Next.js 的正確概念整篇重寫 (`651a762e` → `4d2334a2`)：<https://t.me/c/1066867565/2166664>
 - 使用了 Claude 4 Sonnet Thinking 和 Gemini 2.5 Pro 模型進行初步的 peer reviewing。

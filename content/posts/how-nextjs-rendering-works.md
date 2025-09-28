@@ -109,7 +109,7 @@ Next.js 實驗性的 PPR 就在嘗試解決這個問題。假如你啟用了 [PP
 
 這點又比傳統的模板語言更上一層樓了（或者說更複雜了）。
 
-## Next.js 是不是 vendor lock-in
+## Next.js 有沒有 vendor lock-in
 
 > next.js 感覺比較像是要把開發者綁在自己的生態系內，讓開發者對於 vercel 的服務產生依賴，內部實作許多其他外部套件的功能 [[MozTW](https://t.me/moztw_general/1/263052)]
 

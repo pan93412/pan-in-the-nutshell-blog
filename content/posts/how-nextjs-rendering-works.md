@@ -13,11 +13,11 @@ express-handlebars 通常是純粹的 SSR，不考慮你在頁面中插入的 Ja
 
 > Hydration 是指 React 接管由伺服器產生的靜態 HTML、並為其附加事件監聽器與狀態，使其從無生命的骨架變成可互動應用的關鍵步驟。
 
-純粹的 React，就以搭配 Vite 來說的話，是 CSR。因為背後不用有配合的伺服器（NGINX、Caddy 這種），放在靜態網站上就可以。
+純粹的 React，就以搭配 Vite 來說的話，是 CSR。因為背後不用有配合的伺服器，放在可以 host 靜態網站的 web server 上就可以（比如 NGINX、Caddy 這種）。
 
 ## Next.js 的 Client Components 是怎麼做 SSR 的？
 
-接下來回頭看 Next.js。如果只看 Client Component，會相對簡單一點，可以分成 SSG (+ISR)、SSR、CSR 的部分[^1][^2][^3]：
+接下來回頭看 Next.js。如果只看 Client Component，會相對簡單一點，可以分成 SSG (+ISR)、SSR、CSR 的部分[^1] [^2] [^3]：
 
 - 如果是靜態路由（瀏覽器輸入什麼，產物都相同），Next.js 會在編譯期 (build time) 產生頁面，這叫 SSG (Static Site Generation)。另外還有一個叫 ISR (Incremental Static Regeneration) 增量渲染，如果 SSG 的頁面到期了，或者是遇到 SSG 不能推斷的頁面，就重新渲染。
   ![ISR](https://assets.blog.pan93.com/how-nextjs-rendering-works/isr.avif)

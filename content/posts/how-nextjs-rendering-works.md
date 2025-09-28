@@ -50,7 +50,7 @@ express-handlebars 通常是純粹的 SSR，不考慮你在頁面中插入的 Ja
 - 大部分的靜態頁面和 Server Components 都會被 SSG。
 - 有些動態路由（比如 `/posts/[id]`），可以在 Vercel 中看到被 SSR 後進入 ISR cache 了。這樣下次瀏覽就會是 SSG，不用再重新渲染一遍。
 - 如果你的 Server Components 是動態的，且在 Client Components 裡面，你會看到有一些 `?rsc` 的 fetch 請求被打出去，這裡有點像是 CSR。
-- 如果你的 Client Components 裡面有 `fetch` 東西，那就是 CSR。
+- 如果你的 Client Components 裡面有 `fetch` 東西後進行渲染，那通常都是 CSR。如果有搭配 streaming SSR 的框架 (e.g. [@apollo/client-react-streaming](https://github.com/apollographql/apollo-client-integrations/tree/main/packages/client-react-streaming))，那也可能是 SSR 的。
 
 實務上 Next.js 可能會運用非常多的渲染方式，在 Vercel 的 Observability 中可以分開來看：
 
@@ -62,7 +62,7 @@ express-handlebars 通常是純粹的 SSR，不考慮你在頁面中插入的 Ja
 
 ## Next.js 的 PPR
 
-Next.js 還有一個實驗性的魔法：通常來講 SSR 都是一個請求打回來，也就是一次就是完全 rendered 的結果。所以如果你在 Server Components 裡面用了動態元素，即便有沒有套上 Suspense 都不能 SSG，每次瀏覽都必須等待帶有動態元素的元件 SSR 完後才能看到頁面。
+Next.js 還有一個實驗性的魔法：通常來講 SSR 都是一個請求打回來，也就是一次就是完全 rendered 的結果。所以如果你在 Server Components 裡面用了動態元素，即便有沒有套上 Suspense 都不能 SSG，每次瀏覽都必須等待帶有動態元素的元件 rendered 完後才能看到頁面。
 
 但假如你啟用了 [PPR (Partial Prerendering)](https://nextjs.org/docs/app/getting-started/partial-prerendering)，那就會看到 initial HTML 以一種很特別的形式回傳回來：你會看到 App Frame 先回傳回來，然後後面組了一些好像不太合 HTML 規範的資料和一些 script，整個請求需要很長一段時間才會結束，但頁面卻不用等整個 HTML 下載完就能進行渲染。
 
